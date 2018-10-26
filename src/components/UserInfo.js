@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../App.css";
 import * as api from "../api";
 
 class UserInfo extends Component {
@@ -10,13 +11,13 @@ class UserInfo extends Component {
     api
       .getUserById(this.props.createdBy)
       .then(({ user }) => this.setState({ user }))
-      .catch(err => {
-        this.setState({ user: undefined });
+      .catch(() => {
+        this.setState({ user: { name: undefined } });
       });
   };
 
   render() {
-    if (this.state.user === undefined)
+    if (this.state.user.name === undefined)
       return (
         <div className="userInfoContainer">
           <p>Unknown user</p>
@@ -24,10 +25,18 @@ class UserInfo extends Component {
       );
     else
       return (
-        <div className="userInfoContainer">
-          <p>{this.state.user.name}</p>
-          {/* <img src={this.state.user.avatar_url} /> */
-          this.props.contentType === "comment" &&
+        <div className="tile is-vertical">
+          <br />
+          <div className="avatar">
+            <img
+              className="image is-64x64"
+              src={this.state.user.avatar_url}
+              alt="user avatar"
+            />
+          </div>
+          <br />
+          <strong>{this.state.user.username}</strong>
+          {this.props.contentType === "comment" &&
           this.state.user.username === "tickle122" ? (
             <button
               type="button"

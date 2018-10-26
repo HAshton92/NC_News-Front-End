@@ -33,6 +33,12 @@ export const voteOnArticle = (articleID, vote) => {
     .then(({ data }) => data);
 };
 
+export const createArticle = (topicSlug, newArticle) => {
+  return axios
+    .post(`${apiURL}topics/${topicSlug}/articles`, newArticle)
+    .then(({ data }) => data);
+};
+
 export const voteOnComment = (commentID, vote) => {
   return axios
     .put(`${apiURL}comments/${commentID}?vote=${vote}`)
@@ -49,6 +55,10 @@ export const deleteComment = commentID => {
   return axios
     .delete(`${apiURL}comments/${commentID}`)
     .then(({ data }) => data);
+};
+
+export const getUsers = () => {
+  return axios.get(`${apiURL}users`).then(({ data }) => data);
 };
 
 export const getUserById = userID => {

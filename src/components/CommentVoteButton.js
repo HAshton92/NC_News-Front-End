@@ -1,39 +1,36 @@
 import React from "react";
 
 function CommentVoteButton({
+  handleUpVote,
+  handleDownVote,
   votedUpOn,
   votedDownOn,
-  handleCommentVote,
   votes,
   commentID
 }) {
   const userHasVotedUp = votedUpOn.includes(commentID);
   const userHasVotedDown = votedDownOn.includes(commentID);
 
-  //NOTE TO SELF: CLEAN THIS SHIT UP
-  //    ||
-  //   _||_
-  //   \  /
-  //    \/
-
   return (
     <div className="voteContainer">
       <button
-        className="likeButton"
+        className="button is-outlined"
         onClick={e => {
-          if (userHasVotedUp === false) handleCommentVote(commentID, "up");
+          if (userHasVotedUp === false) handleUpVote(commentID);
         }}
       >
-        {userHasVotedUp ? "LIKED" : "LIKE"}
+        {userHasVotedUp ? "✔️" : "🔺"}
       </button>
-      <p>{votes}</p>
+      <br />
+      <span className="has-text-weight-bold has-text-danger is-size-3">{`${votes}`}</span>
+      <br />
       <button
-        className="dislikeButton"
+        className="button is-outlined"
         onClick={e => {
-          if (userHasVotedDown === false) handleCommentVote(commentID, "down");
+          if (userHasVotedDown === false) handleDownVote(commentID);
         }}
       >
-        {userHasVotedDown ? "DISLIKED" : "DISLIKE"}
+        {userHasVotedDown ? "✔️" : "🔻 "}
       </button>
     </div>
   );

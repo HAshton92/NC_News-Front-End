@@ -9,21 +9,21 @@ function ArticleVoteButton({
 }) {
   return (
     <div className="voteContainer">
-      <div>
-        {userHasVotedUp ? (
-          <h1>LIKED</h1>
-        ) : (
-          <button onClick={e => handleUpVote()}>LIKE</button>
-        )}
-      </div>
-      <p>{votes}</p>
-      <div>
-        {userHasVotedDown ? (
-          <h1>DISLIKED</h1>
-        ) : (
-          <button onClick={e => handleDownVote()}>DISLIKE</button>
-        )}
-      </div>
+      <button
+        className="button is-medium is-outlined"
+        onClick={e => handleUpVote()}
+      >
+        {userHasVotedUp ? "✔️" : "🔺"}
+      </button>
+      <br />
+      <span className="has-text-weight-bold has-text-danger is-size-2">{`${votes}`}</span>
+      <br />
+      <button
+        className="button is-medium is-outlined"
+        onClick={e => handleDownVote()}
+      >
+        {userHasVotedDown ? "✔️" : "🔻 "}
+      </button>
     </div>
   );
 }

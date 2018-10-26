@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as api from "../api";
+import Loading from "./Loading";
 
 class ExploreTopics extends Component {
   state = {
@@ -13,21 +14,32 @@ class ExploreTopics extends Component {
 
   render() {
     return (
-      <div className="topicsContainer">
-        <h2>Topics</h2>
-        {this.state.topics
-          ? this.state.topics.map(topic => {
+      <section className="section">
+        <div className="has-text-black">
+          <span className="is-size-4 has-text-weight-bold">Topics</span>
+          <br />
+          <br />
+          {this.state.topics.length ? (
+            this.state.topics.map(topic => {
               return (
                 <div key={topic.slug}>
-                  <h3>
-                    {" "}
-                    <Link to={`/topics/${topic.slug}`}>{topic.title}</Link>
-                  </h3>
+                  <button className="button is-large">
+                    <Link to={`/topics/${topic.slug}`}>
+                      <span className="has-text-danger has-text-weight-semibold">{`< ${
+                        topic.title
+                      } >`}</span>
+                    </Link>
+                  </button>
+                  <br />
+                  <br />
                 </div>
               );
             })
-          : "LOADING..."}
-      </div>
+          ) : (
+            <Loading />
+          )}
+        </div>
+      </section>
     );
   }
 }
